@@ -1,0 +1,55 @@
+## Requirements
+
+To build the API on Vercel, you need at least three supporting files:
+
+
+|**No.**|**File**|**Description**|
+|---|---|---|
+|1|main.py|this file contains your API (You can change the file name)|
+|2|requirements.txt|this file contains a list of libraries that you need. Vercel will install them based on the list|
+|3|vercel.json|This file is the running app configuration|
+
+To ease your learning, you can create `requirements.txt` and `vercel.json`  and copy-paste these examples:
+
+**requirements.txt**
+
+```text
+fastapi
+uvicorn[standard]
+```
+
+
+**vercel.json**
+
+```json
+{
+  "devCommand": "uvicorn api:app --host 0.0.0.0 --port 3000",
+  "builds": [
+    {
+      "src": "api.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api.py"
+    }
+  ]
+}
+```
+
+**Notes:** you can change the `main:app` in thecommand `uvicorn main:app ....` into `uvicorn your-app-file:app ....` if your API file is not named `main.py`.
+
+For example:
+
+Your file is `myapi.py` so you my write `"uvicorn myapi:app --host 0.0.0.0 --port 3000"
+
+This change also applied for `"src"` on `"builds"` and `"routes"`.
+
+---
+
+#### Final steps before building the project:
+
+1. Create a repository on your GitHub
+2. Push those three files onto your new repository
